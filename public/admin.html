@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JARVIS Control Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <style>
+    body {
+      background: #0f0f0f;
+      color: #00ffff;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .panel {
+      background: #121212;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px #00ffff44;
+      width: 90%;
+      max-width: 500px;
+    }
+    input, textarea {
+      background: #1a1a1a;
+      color: #00ffff;
+      border: 1px solid #00ffff44;
+    }
+    .glow-button {
+      background: #00ffff;
+      color: black;
+      font-weight: bold;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: 0.3s;
+    }
+    .glow-button:hover {
+      box-shadow: 0 0 10px #00ffffaa, 0 0 20px #00ffffaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1 class="text-2xl font-bold mb-4">🧠 JARVIS Admin Panel</h1>
+    <form id="commandForm">
+      <label for="command" class="block mb-2">Enter Command:</label>
+      <textarea id="command" class="w-full p-2 rounded mb-4" rows="4" placeholder='e.g., {"action":"say", "message":"Hello"}'></textarea>
+      <button type="submit" class="glow-button w-full">Send Command</button>
+    </form>
+    <p id="status" class="mt-4 text-sm text-green-400"></p>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCvFSBPzE9yne0ziYqruXAL5MLIHCHY10o",
+      authDomain: "corejarvis-22369.firebaseapp.com",
+      projectId: "corejarvis-22369",
+      storageBucket: "corejarvis-22369.appspot.com",
+      messagingSenderId: "307781562443",
+      appId: "1:307781562443:web:23c1c49ab1e10a48089dce"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const form = document.getElementById('commandForm');
+    const commandInput = document.getElementById('command');
+    const statusText = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const raw = commandInput.value.trim();
+      if (!raw) return alert("Please enter a command");
+
+      try {
+        const data = JSON.parse(raw);
+        await db.collection("commands").add({
+          ...data,
+          timestamp: new Date().toISOString()
+        });
+        statusText.innerText = "✅ Command sent successfully!";
+        commandInput.value = "";
+      } catch (err) {
+        statusText.innerText = "❌ Error: Invalid JSON or Firebase issue.";
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

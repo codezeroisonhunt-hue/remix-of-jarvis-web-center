@@ -1,0 +1,164 @@
+
+/* Scanline effect */
+.scanline {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  animation: scanline 6s linear infinite;
+}
+
+.scanline::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: rgba(57, 255, 20, 0.3);
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.6);
+  animation: scanline-before 3s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+@keyframes scanline-before {
+  0% {
+    top: 0%;
+    opacity: 0.8;
+  }
+  50% {
+    top: 50%;
+    opacity: 0.5;
+  }
+  100% {
+    top: 100%;
+    opacity: 0.8;
+  }
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff00c1;
+  background: transparent;
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: 1px 0 #0ff;
+  background: transparent;
+  animation: glitch-anim2 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip-path: inset(40% 0 61% 0);
+  }
+  20% {
+    clip-path: inset(92% 0 1% 0);
+  }
+  40% {
+    clip-path: inset(43% 0 1% 0);
+  }
+  60% {
+    clip-path: inset(25% 0 58% 0);
+  }
+  80% {
+    clip-path: inset(54% 0 7% 0);
+  }
+  100% {
+    clip-path: inset(58% 0 43% 0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip-path: inset(25% 0 58% 0);
+  }
+  20% {
+    clip-path: inset(54% 0 7% 0);
+  }
+  40% {
+    clip-path: inset(58% 0 43% 0);
+  }
+  60% {
+    clip-path: inset(40% 0 61% 0);
+  }
+  80% {
+    clip-path: inset(92% 0 1% 0);
+  }
+  100% {
+    clip-path: inset(43% 0 1% 0);
+  }
+}
+
+/* Auto-type effect */
+.type-text {
+  overflow: hidden;
+  border-right: 2px solid rgba(57, 255, 20, 0.75);
+  white-space: nowrap;
+  margin: 0;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: rgba(57, 255, 20, 0.75) }
+}
+
+/* Flicker effect for CRT monitor */
+.flicker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 9;
+  pointer-events: none;
+  animation: flicker 0.3s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.1; }
+  25% { opacity: 0.3; }
+  50% { opacity: 0; }
+  75% { opacity: 0.1; }
+  100% { opacity: 0; }
+}

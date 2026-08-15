@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  --jarvis-red: #B30000;
+  --jarvis-gold: #FFD700;
+  --jarvis-dark: #0C3D4D;
+  --jarvis-glow: rgba(179, 0, 0, 0.4);
+  --hologram-color: #FFD700;
+  --neon-purple: #8B5CF6;
+  --neon-blue: #33C3F0;
+  --midnight: #090C10;
+}
+
+#root {
+  width: 100%;
+  margin: 0 auto;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--midnight);
+  font-family: 'JetBrains Mono', monospace;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(30, 174, 219, 0.03) 0%, transparent 80%);
+  z-index: -1;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: white;
+  transition: all 0.3s ease;
+  background-color: var(--midnight);
+}
+
+main {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.jarvis-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .jarvis-container {
+    flex-direction: row;
+  }
+}
+
+/* Hacker mode styles */
+.hacker-mode {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: #000;
+}
+
+/* Circuit grid animation */
+.tech-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+/* Animations */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  25%, 75% { opacity: 0.9; }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateY(-10px); 
+    opacity: 0.8;
+  }
+}
+
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.6; }
+  75%, 100% { transform: scale(1.2); opacity: 0; }
+}
+
+@keyframes wave {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+@keyframes scan {
+  0%, 100% { transform: translateY(-100%); }
+  50% { transform: translateY(100%); }
+}
+
+@keyframes matrix-fall {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Specific Animation Classes */
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+.animate-flicker {
+  animation: flicker 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-ping-slow {
+  animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animate-wave {
+  animation: wave 2.5s ease-in-out infinite;
+}
+
+.animate-orbit {
+  animation: orbit 10s linear infinite;
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+
+.animate-matrix-fall {
+  animation: matrix-fall 10s linear infinite;
+}
+
+.shadow-glow-sm {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Neon elements */
+.neon-text {
+  color: var(--neon-blue);
+  text-shadow: 0 0 5px rgba(51, 195, 240, 0.7), 0 0 10px rgba(51, 195, 240, 0.5);
+}
+
+.neon-purple-text {
+  color: var(--neon-purple);
+  text-shadow: 0 0 5px rgba(139, 92, 246, 0.7), 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+.neon-border {
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 5px rgba(51, 195, 240, 0.5), 0 0 10px rgba(51, 195, 240, 0.3);
+}
+
+.neon-purple-border {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 5px rgba(139, 92, 246, 0.5), 0 0 10px rgba(139, 92, 246, 0.3);
+}
+
+.neon-glow {
+  box-shadow: 0 0 15px rgba(51, 195, 240, 0.4), 0 0 30px rgba(51, 195, 240, 0.2);
+}
+
+.neon-purple-glow {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.4), 0 0 30px rgba(139, 92, 246, 0.2);
+}
+
+/* Hacker mode styles */
+.hacker-grid {
+  background-image: linear-gradient(rgba(0, 40, 0, 0.1) 1px, transparent 1px),
+                   linear-gradient(90deg, rgba(0, 40, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.hacker-text {
+  color: #00ff00;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.hacker-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(255, 0, 0, 0.5);
+  opacity: 0.3;
+  animation: scan 3s linear infinite;
+  pointer-events: none;
+}
+
+.matrix-char {
+  animation: float 5s ease-in-out infinite;
+  opacity: 0.6;
+  font-family: monospace;
+  text-shadow: 0 0 3px #ff0000;
+}
+
+/* Jarvis Panel Styles */
+.jarvis-panel {
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(139, 92, 246, 0.1);
+  transition: all 0.3s ease;
+}
+
+.jarvis-panel:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2), 0 0 15px rgba(139, 92, 246, 0.1);
+}
+
+/* Holographic text effect */
+.holographic-text {
+  color: transparent;
+  background-image: linear-gradient(to right, var(--jarvis-blue), var(--hologram-color), var(--jarvis-blue));
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: pulse-subtle 2s ease-in-out infinite;
+}
+
+/* Core glow effect */
+.core-glow {
+  box-shadow: 0 0 30px rgba(179, 0, 0, 0.3), 0 0 15px rgba(255, 215, 0, 0.2) inset;
+}
